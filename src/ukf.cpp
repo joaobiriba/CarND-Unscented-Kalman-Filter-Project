@@ -26,10 +26,10 @@ UKF::UKF() {
   P_ = MatrixXd(5, 5);
 
   // Process noise standard deviation longitudinal acceleration in m/s^2
-  std_a_ = 30;
+  std_a_ = 2;
 
   // Process noise standard deviation yaw acceleration in rad/s^2
-  std_yawdd_ = 30;
+  std_yawdd_ = 0.3;
 
   // Laser measurement noise standard deviation position1 in m
   std_laspx_ = 0.15;
@@ -131,7 +131,7 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
    *  Prediction
    ****************************************************************************/
    //compute the time elapsed between the current and previous measurements
-   float dt = (meas_package.timestamp_ - time_us_) / DELAY_USEC;	//dt - expressed in seconds
+   float dt = (meas_package.timestamp_ - time_us_) / 1000000.0;	//dt - expressed in seconds
    time_us_ = meas_package.timestamp_;
 
    Prediction(dt);
